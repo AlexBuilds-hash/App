@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #31104b 100%);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --text-main: #ffffff;
+            --text-sub: #cbd5e1;
+            --accent-blue: #38bdf8;
+            --accent-hover: #0284c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: var(--primary-gradient);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Search Form */
+        form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: #94a3b8;
+        }
+
+        input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+
+        button {
+            padding: 0.8rem 1.25rem;
+            border: none;
+            border-radius: 12px;
+            background: var(--accent-blue);
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background: #7dd3fc;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Error Box */
+        .error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Weather Card Display */
+        .weather {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .weather h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .temp-display {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0.25rem 0;
+        }
+
+        .weather img {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            margin: -0.5rem 0;
+        }
+
+        .condition-text {
+            text-transform: capitalize;
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .detail-item {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            text-align: center;
+        }
+
+        .detail-item span {
+            display: block;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        /* Recent Searches */
+        .recent {
+            text-align: left;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.25rem;
+        }
+
+        .recent h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-sub);
+            margin-bottom: 0.75rem;
+        }
+
+        .recent ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .recent li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-sub);
+        }
+
+        .recent li strong {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name..." autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if weather %}
+            <div class="weather">
+                <h2>{{ weather.city }}</h2>
+                <div class="temp-display">{{ weather.temperature }}°C</div>
+                
+                <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon">
+                <p class="condition-text">{{ weather.description }}</p>
+
+                <div class="details-grid">
+                    <div class="detail-item">
+                        Humidity
+                        <span>{{ weather.humidity }}%</span>
+                    </div>
+                    <div class="detail-item">
+                        Pressure
+                        <span>{{ weather.pressure }} hPa</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if recent_searches %}
+            <div class="recent">
+                <h3>Recent Searches</h3>
+                <ul>
+                    {% for search in recent_searches %}
+                        <li>
+                            <strong>{{ search.city_name }}</strong>
+                            <span>{{ search.temperature }}°C • {{ search.description }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
