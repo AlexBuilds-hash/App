@@ -1,2 +1,66 @@
-# Weather App
-# Weather App 🌤️  A simple and responsive **Weather Application** built using **Django**. The app allows users to search for a city and view its current weather information.  ## 🚀 Features  * 🌍 Search weather by city name * 🌡️ Display current temperature * ☁️ Show weather conditions * 💧 Display humidity * 💨 Display wind speed * 📱 Responsive and user-friendly interface * 🔄 Fetch real-time weather data using a weather API * ⚙️ Built with Django  ## 🛠️ Technologies Used  * **Python** * **Django** * **HTML5** * **CSS3** * **JavaScript** * **Weather API**  ## 📂 Project Structure  ```text weather-app/ │ ├── manage.py ├── requirements.txt │ ├── weather/ │   ├── migrations/ │   ├── templates/ │   ├── static/ │   ├── admin.py │   ├── models.py │   ├── views.py │   ├── urls.py │   └── ... │ └── README.md ```  ## ⚙️ Installation  ### 1. Clone the repository  ```bash git clone https://github.com/Alexbuilds/weather-app.git cd weather-app ```  ### 2. Create a virtual environment  ```bash python -m venv venv ```  Activate it:  **Windows:**  ```bash venv\Scripts\activate ```  **macOS/Linux:**  ```bash source venv/bin/activate ```  ### 3. Install dependencies  ```bash pip install -r requirements.txt ```  ### 4. Configure the API key  Create a `.env` file and add your weather API key:  ```env WEATHER_API_KEY=your_api_key_here ```  > Make sure you don't commit your API key or `.env` file to GitHub.  ### 5. Run migrations  ```bash python manage.py migrate ```  ### 6. Start the development server  ```bash python manage.py runserver ```  Open your browser and visit:  ```text http://127.0.0.1:8000/ ```  ## 📸 Screenshots  Add screenshots of your application here:  ```markdown ![Weather App Screenshot](screenshots/home.png) ```  ## 🔮 Future Improvements  * Add a 5-day weather forecast * Add weather icons and animations * Detect the user's location automatically * Add search history * Add temperature unit conversion (°C / °F) * Improve UI with a modern design * Deploy the application online  ## 🤝 Contributing  Contributions are welcome! Feel free to fork this repository, make your changes, and submit a pull request.  ## 📄 License  This project is open-source and available under the **MIT License**.  ## 👨‍💻 Author  **Alex**  GitHub: `https://github.com/Alexbuilds`
+# 🌦️ Weather App
+
+A simple and user-friendly **Weather App** developed using **HTML, CSS, Python, and Django**. It allows users to search for a city and view its current weather information.
+
+## ✨ Features
+
+* 🔍 Search weather by city name
+* 🌡️ Display current temperature
+* 💧 Show humidity
+* 💨 Display wind speed
+* ☁️ Show current weather conditions
+* 📱 Simple and responsive interface
+
+## 🛠️ Technologies Used
+
+* **HTML** – Website structure
+* **CSS** – Styling and design
+* **Python** – Backend programming
+* **Django** – Web framework
+* **Weather API** – Fetching weather data
+
+## 📂 Project Structure
+
+```text
+weather-app/
+│
+├── manage.py
+├── weather/
+│   ├── views.py
+│   ├── urls.py
+│   └── models.py
+│
+├── templates/
+│   └── index.html
+│
+├── static/
+│   └── style.css
+│
+└── README.md
+```
+
+## 🚀 How to Run
+
+1. Clone or download the project.
+2. Open the project folder in VS Code.
+3. Install Django:
+
+```bash
+pip install django
+```
+
+4. Run the server:
+
+```bash
+python manage.py runserver
+```
+
+5. Open the displayed local URL in your browser.
+
+## 🎯 Purpose
+
+This project demonstrates the use of **Django, Python, HTML, CSS, and APIs** to create a practical real-world web application.
+
+## 👨‍💻 Author
+
+**Alexbuilds**
